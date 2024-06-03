@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#FFFEFE">
+
+    <TextView
+        android:id="@+id/tv_ml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ma_loai"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMaLoaiSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_ml"
+        android:text="@string/number"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ml"
+        android:text="@string/ten_loai"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTenLoaiSach"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMaLoaiSach"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_tl"
+        android:text="@string/text"
+        android:textSize="18sp"/>
+
+    <ImageButton
+        android:id="@+id/imgEdit_ls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/imgDelete_ls"
+        android:layout_marginEnd="5dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/ic_edit"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/imgDelete_ls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="#FFFFFF"
+        android:src="@drawable/ic_trash"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

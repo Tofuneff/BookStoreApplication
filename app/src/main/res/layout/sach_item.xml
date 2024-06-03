@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/tv_ms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ma_sach"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMaSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_ms"
+        android:text="@string/number"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_ts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ms"
+        android:text="@string/ten_sach"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTenSach"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ms"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_ts"
+        android:text="@string/text"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_giaThue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ts"
+        android:text="@string/gia_thue"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvGiaThue"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTenSach"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_giaThue"
+        android:text="@string/number"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_ls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGiaThue"
+        android:text="@string/loai_sach"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvLoaiSach"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGiaThue"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/tv_ls"
+        android:text="@string/text"
+        android:textSize="16sp"/>
+
+    <ImageButton
+        android:id="@+id/imgEditSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ms"
+        android:layout_toStartOf="@+id/imgDeleteSach"
+        android:layout_marginEnd="5dp"
+        android:background="#FFFFFF"
+        android:src="@drawable/ic_edit"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/imgDeleteSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_ms"
+        android:layout_alignParentEnd="true"
+        android:background="#fff"
+        android:src="@drawable/ic_trash"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

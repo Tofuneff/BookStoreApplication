@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/quan_ly_phieu_muon"
+        android:title="@string/quan_ly_phieu_muon"
+        android:icon="@drawable/ic_receipt"/>
+
+    <item android:id="@+id/quan_ly_loai_sach"
+        android:title="@string/quan_ly_loai_sach"
+        android:icon="@drawable/ic_books"/>
+
+    <item android:id="@+id/quan_ly_sach"
+        android:title="@string/quan_ly_sach"
+        android:icon="@drawable/ic_book"/>
+
+    <item android:id="@+id/quan_ly_thanh_vien"
+        android:title="@string/quan_ly_thanh_vien"
+        android:icon="@drawable/ic_crowd"/>
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="@string/thong_ke">
+
+            <menu>
+
+                <item android:id="@+id/top_10_sach_muon_nhieu_nhat"
+                    android:title="@string/top_10_sach_muon_nhieu_nhat"
+                    android:icon="@drawable/ic_best"/>
+
+                <item android:id="@+id/doanh_thu"
+                    android:title="@string/doanh_thu"
+                    android:icon="@drawable/ic_total"/>
+
+            </menu>
+
+        </item>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="@string/nguoi_dung">
+
+            <menu>
+
+                <item android:id="@+id/them_nguoi_dung"
+                    android:title="@string/them_nguoi_dung"
+                    android:icon="@drawable/ic_add_user"/>
+
+                <item android:id="@+id/doi_mat_khau"
+                    android:title="@string/doi_mat_khau"
+                    android:icon="@drawable/ic_change_password"/>
+
+                <item android:id="@+id/dang_xuat"
+                    android:title="@string/dang_xuat"
+                    android:icon="@drawable/ic_logout"/>
+
+            </menu>
+
+        </item>
+
+    </group>
+
+</menu>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="50dp"
+    tools:context=".fragments.ChangePasswordFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        tools:ignore="UselessParent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_tu_ngay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_calendar"
+            android:text="@string/tu_ngay"
+            android:textSize="16sp"
+            android:background="@drawable/border"
+            />
+
+        <EditText
+            android:id="@+id/edt_tu_ngay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nhap_ngay_bat_dau"
+            android:inputType="date"
+            android:layout_marginStart="19dp"
+            tools:ignore="Autofill,TextFields" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_den_ngay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_calendar"
+            android:text="@string/den_ngay"
+            android:textSize="16sp"
+            android:background="@drawable/border" />
+
+        <EditText
+            android:id="@+id/edt_den_ngay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nhap_ngay_ket_thuc"
+            android:inputType="date"
+            android:layout_marginStart="10dp"
+            tools:ignore="Autofill,TextFields" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_doanh_thu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_dollar"
+        android:text="@string/doanh_thu"
+        android:textSize="16sp"
+        android:background="@drawable/border"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A5A4A4"
+        android:layout_marginTop="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tong_doanh_thu"
+            android:textSize="22sp"
+            android:textColor="#6B6C6B"
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_doanh_thu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/money"
+            android:textSize="22sp"
+            android:textColor="#4CAF50"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A5A4A4"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>
