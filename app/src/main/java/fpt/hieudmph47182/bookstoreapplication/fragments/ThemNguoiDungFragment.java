@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import fpt.hieudmph47182.bookstoreapplication.R;
 import fpt.hieudmph47182.bookstoreapplication.dao.ThuThuDAO;
 import fpt.hieudmph47182.bookstoreapplication.databinding.FragmentThemNguoiDungBinding;
 import fpt.hieudmph47182.bookstoreapplication.model.ThuThu;
@@ -20,10 +19,6 @@ import fpt.hieudmph47182.bookstoreapplication.model.ThuThu;
 public class ThemNguoiDungFragment extends Fragment {
     private FragmentThemNguoiDungBinding binding;
     private ThuThuDAO dao;
-
-    public static ThemNguoiDungFragment newInstance() {
-        return new ThemNguoiDungFragment();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +28,6 @@ public class ThemNguoiDungFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentThemNguoiDungBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -57,10 +51,10 @@ public class ThemNguoiDungFragment extends Fragment {
     }
 
     public void createAccount() {
-        String userName = binding.edtUserName.getText().toString();
-        String hoVaTen = binding.edtHoVaTen.getText().toString();
-        String matKhau = binding.edtPassword.getText().toString();
-        String confirmPass = binding.edtConfirmPassword.getText().toString();
+        String userName = Objects.requireNonNull(binding.edtUserName.getText()).toString();
+        String hoVaTen = Objects.requireNonNull(binding.edtHoVaTen.getText()).toString();
+        String matKhau = Objects.requireNonNull(binding.edtPassword.getText()).toString();
+        String confirmPass = Objects.requireNonNull(binding.edtConfirmPassword.getText()).toString();
         if (userName.isEmpty() || hoVaTen.isEmpty() || matKhau.isEmpty() || confirmPass.isEmpty()) {
             Toast.makeText(requireActivity(), "Bạn phải nhập đẩy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else if (!matKhau.equals(confirmPass)) {

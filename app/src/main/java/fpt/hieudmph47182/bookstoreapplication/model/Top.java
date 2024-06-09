@@ -1,15 +1,21 @@
 package fpt.hieudmph47182.bookstoreapplication.model;
 
 public class Top {
+    private int maSach;
     private String tenSach;
     private int soLuong;
-
-    public Top() {
-    }
 
     public Top(String tenSach, int soLuong) {
         this.tenSach = tenSach;
         this.soLuong = soLuong;
+    }
+
+    public int getMaSach() {
+        return maSach;
+    }
+
+    public void setMaSach(int maSach) {
+        this.maSach = maSach;
     }
 
     public String getTenSach() {

@@ -22,6 +22,7 @@ import fpt.hieudmph47182.bookstoreapplication.model.ThuThu;
 public class ChangePasswordFragment extends Fragment {
     private FragmentChangePasswordBinding binding;
     private ThuThuDAO thuThuDAO;
+    private ThuThu thuThu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,10 +52,10 @@ public class ChangePasswordFragment extends Fragment {
             SharedPreferences pref = requireActivity().getSharedPreferences("ACCOUNT_FILE", Context.MODE_PRIVATE);
             String user = pref.getString("USERNAME", "");
             if (validate() > 0) {
-                ThuThu thuThu = thuThuDAO.getAllThuThu().get(0);
+                thuThu = thuThuDAO.getTTByMaTT(user);
                 thuThu.setMatKhau(Objects.requireNonNull(binding.edtNewPassword.getText()).toString());
-                thuThuDAO.updateThuThu(thuThu);
-                if (thuThuDAO.updateThuThu(thuThu)) {
+                boolean check = thuThuDAO.updateThuThu(thuThu);
+                if (check) {
                     Toast.makeText(requireActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                     binding.edtCurrentPassword.setText("");
                     binding.edtNewPassword.setText("");
@@ -81,7 +82,8 @@ public class ChangePasswordFragment extends Fragment {
             if (!currentPass.equals(binding.edtCurrentPassword.getText().toString())) {
                 Toast.makeText(requireActivity(), "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
                 check = -1;
-            } else if (!newPass.equals(confirmPass)) {
+            }
+            if (!newPass.equals(confirmPass)) {
                 Toast.makeText(requireActivity(), "Mật khẩu mới không khớp", Toast.LENGTH_SHORT).show();
                 check = -1;
             }

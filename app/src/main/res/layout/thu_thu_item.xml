@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    android:background="#FFFFFF">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#FFF"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             app:cardCornerRadius="50dp">
 
             <ImageView
-                android:id="@+id/img_sach"
+                android:id="@+id/img_tt"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:contentDescription="@string/todo"
@@ -39,15 +40,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ma_sach"
+                android:text="@string/ma_thu_thu"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/tv_maSach"
+                android:id="@+id/tv_maThuThu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/number"
+                android:text="@string/text"
                 android:textSize="18sp"
                 android:layout_marginStart="5dp"/>
 
@@ -66,12 +67,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ten_sach"
+                android:text="@string/ten_thu_thu"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/tv_tenSach_tk"
+                android:id="@+id/tv_tenThuThu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text"
@@ -93,20 +94,41 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/s_l_t_m_n"
+                android:text="@string/mat_khau_tt"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/tv_soLuong"
+                android:id="@+id/tv_passThuThu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/number"
+                android:text="@string/text"
                 android:textSize="18sp"
                 android:layout_marginStart="5dp"/>
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/imgEdit_tt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgDelete_tt"
+            android:layout_below="@+id/ll1"
+            android:layout_marginEnd="5dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/ic_edit"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/imgDelete_tt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ll1"
+            android:background="#FFFFFF"
+            android:src="@drawable/ic_trash"
+            tools:ignore="ContentDescription" />
+
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

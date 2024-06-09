@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,12 +27,12 @@ import fpt.hieudmph47182.bookstoreapplication.fragments.SachFragment;
 import fpt.hieudmph47182.bookstoreapplication.fragments.ThanhVienFragment;
 import fpt.hieudmph47182.bookstoreapplication.fragments.ThemNguoiDungFragment;
 import fpt.hieudmph47182.bookstoreapplication.fragments.ThongKeFragment;
+import fpt.hieudmph47182.bookstoreapplication.fragments.ThuThuFragment;
 import fpt.hieudmph47182.bookstoreapplication.model.ThuThu;
-
+@SuppressLint({"InflateParams", "WrongViewCast", "SetTextI18n"})
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityMainBinding binding;
 
-    @SuppressLint({"InflateParams", "WrongViewCast", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View headerView = binding.navigationView.getHeaderView(0);
         TextView tvUsername = headerView.findViewById(R.id.tvUser);
+        ImageView ivAvatar = headerView.findViewById(R.id.ivAvatar);
 
         Intent i = getIntent();
         String username = i.getStringExtra("USERNAME");
@@ -63,11 +65,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         assert username != null;
         if (username.equalsIgnoreCase("admin")) {
             binding.navigationView.getMenu().findItem(R.id.them_nguoi_dung).setVisible(true);
+            binding.navigationView.getMenu().findItem(R.id.quan_ly_thu_thu).setVisible(true);
+        } else {
+            ivAvatar.setImageResource(R.drawable.avatar4);
         }
         binding.navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -93,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.them_nguoi_dung) {
             replaceFragment(new ThemNguoiDungFragment());
             binding.tvTitle.setText("Thêm người dùng");
+        } else if (id == R.id.quan_ly_thu_thu) {
+            replaceFragment(new ThuThuFragment());
+            binding.tvTitle.setText("Quản lý Thủ thư");
         } else if (id == R.id.doi_mat_khau) {
             replaceFragment(new ChangePasswordFragment());
             binding.tvTitle.setText("Thay đổi mật khẩu");

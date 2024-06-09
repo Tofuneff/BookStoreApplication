@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import fpt.hieudmph47182.bookstoreapplication.database.DbHelper;
 import fpt.hieudmph47182.bookstoreapplication.model.ThanhVien;
-
+@SuppressLint("Recycle")
 public class ThanhVienDAO {
     private final DbHelper dbHelper;
     private final SQLiteDatabase db;
@@ -23,7 +23,7 @@ public class ThanhVienDAO {
 
     public ThanhVien getTVbyMaTV(int maTV) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE MaTV = ?";
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(maTV)});
+         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(maTV)});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             ThanhVien thanhVien = new ThanhVien(cursor.getString(1),
@@ -37,7 +37,7 @@ public class ThanhVienDAO {
     public ArrayList<ThanhVien> getThanhVien() {
         ArrayList<ThanhVien> thanhViens = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME;
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             ThanhVien thanhVien = new ThanhVien(cursor.getString(1),
                     cursor.getString(2));
@@ -61,11 +61,7 @@ public class ThanhVienDAO {
         values.put("NamSinh", thanhVien.getNamSinh());
         long check = db.update(TABLE_NAME, values, "MaTV = ?",
                 new String[]{String.valueOf(thanhVien.getMaTV())});
-        if (check > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return check > 0;
     }
 
     public boolean deleteThanhVien(ThanhVien thanhVien) {

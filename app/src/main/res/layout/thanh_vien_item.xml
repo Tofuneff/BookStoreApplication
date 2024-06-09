@@ -3,16 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:background="#FFFFFF">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="50dp">
+
+        <ImageView
+            android:id="@+id/imgTV"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/embe"/>
+
+    </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/tv_mtv"
+        android:layout_toEndOf="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ma_thanh_vien"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tvMaTV"
@@ -21,10 +41,12 @@
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/tv_mtv"
         android:text="@string/number"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tv_ttv"
+        android:layout_toEndOf="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_mtv"
@@ -34,7 +56,7 @@
 
     <TextView
         android:id="@+id/tvTenThanhVien"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_mtv"
         android:layout_marginStart="5dp"
@@ -44,6 +66,7 @@
 
     <TextView
         android:id="@+id/tv_ns"
+        android:layout_toEndOf="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_ttv"
@@ -65,7 +88,7 @@
         android:id="@+id/imgEditTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mtv"
+        android:layout_below="@+id/tvNamSinh"
         android:layout_toStartOf="@+id/imgDeleteTV"
         android:layout_marginEnd="5dp"
         android:background="#FFFFFF"
@@ -76,9 +99,10 @@
         android:id="@+id/imgDeleteTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mtv"
+        android:layout_below="@+id/tvNamSinh"
         android:layout_alignParentEnd="true"
         android:background="#FFFFFF"
+        android:layout_marginEnd="20dp"
         android:src="@drawable/ic_trash"
         tools:ignore="ContentDescription" />
 

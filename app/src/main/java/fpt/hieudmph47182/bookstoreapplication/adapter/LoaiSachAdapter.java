@@ -20,7 +20,9 @@ import java.util.Objects;
 
 import fpt.hieudmph47182.bookstoreapplication.R;
 import fpt.hieudmph47182.bookstoreapplication.dao.LoaiSachDAO;
+import fpt.hieudmph47182.bookstoreapplication.dao.SachDAO;
 import fpt.hieudmph47182.bookstoreapplication.model.LoaiSach;
+import fpt.hieudmph47182.bookstoreapplication.model.Sach;
 
 public class LoaiSachAdapter extends BaseAdapter {
     private final Context context;
@@ -54,29 +56,38 @@ public class LoaiSachAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         loaiSachDAO = new LoaiSachDAO(context);
+        SachDAO sachDAO = new SachDAO(context);
         LoaiSach loaiSach = mLoaiSach.get(i);
+        ArrayList<Sach> mSach = sachDAO.getSachByMaSach(loaiSach.getMaLoai());
+        int soLuongSach = mSach.size();
 
         view = LayoutInflater.from(context).inflate(R.layout.loai_sach_item, viewGroup, false);
         TextView tvMaLoaiSach = view.findViewById(R.id.tvMaLoaiSach);
         TextView tvTenLoaiSach = view.findViewById(R.id.tvTenLoaiSach);
+        TextView tvSoLuongSach = view.findViewById(R.id.tvSoLuongSach);
         ImageButton imgEdit_ls = view.findViewById(R.id.imgEdit_ls);
         ImageButton imgDelete_ls = view.findViewById(R.id.imgDelete_ls);
 
         tvMaLoaiSach.setText(String.valueOf(loaiSach.getMaLoai()));
         tvTenLoaiSach.setText(loaiSach.getTenLoaiSach());
+        tvSoLuongSach.setText(String.valueOf(soLuongSach));
 
-        imgDelete_ls.setOnClickListener(v -> deleteDialog(loaiSach));
+        imgDelete_ls.setOnClickListener(v -> deleteDialog(loaiSach, soLuongSach));
         imgEdit_ls.setOnClickListener(v -> editDialog(loaiSach));
 
         return view;
     }
 
-    public void deleteDialog(LoaiSach loaiSach) {
+    public void deleteDialog(LoaiSach loaiSach, int soLuongSach) {
         new AlertDialog.Builder(context)
                 .setTitle("Thông báo")
                 .setMessage("Bạn có thật sự muốn xóa không?")
                 .setNegativeButton("Huỷ", (dialog, which) -> dialog.dismiss())
                 .setPositiveButton("Đồng ý", (dialog, which) -> {
+                    if (soLuongSach > 0) {
+                        Toast.makeText(context, "Không thể xóa loại sách này vì còn sách trong loại sách này", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     boolean delete = loaiSachDAO.deleteLoaiSach(loaiSach);
                     if (delete) {
                         mLoaiSach.remove(loaiSach);

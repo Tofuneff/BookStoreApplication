@@ -16,6 +16,7 @@
         tools:ignore="UselessParent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvAvatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="100dp"
@@ -24,6 +25,7 @@
             android:layout_gravity="center">
 
             <ImageView
+                android:id="@+id/ivAvatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/embe"/>

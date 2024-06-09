@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +33,7 @@ import fpt.hieudmph47182.bookstoreapplication.model.PhieuMuon;
 import fpt.hieudmph47182.bookstoreapplication.model.Sach;
 import fpt.hieudmph47182.bookstoreapplication.model.ThanhVien;
 
+@SuppressLint({"SimpleDateFormat", "ViewHolder", "SetTextI18n"})
 public class PhieuMuonAdapter extends BaseAdapter {
     private final Context context;
     private final ArrayList<PhieuMuon> mPhieuMuon;
@@ -41,7 +43,6 @@ public class PhieuMuonAdapter extends BaseAdapter {
     private SachDAO sachDAO;
     private ThanhVienDAO thanhVienDAO;
     private PhieuMuonDAO phieuMuonDAO;
-    @SuppressLint("SimpleDateFormat")
     SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd");
     private int maThanhVien;
     private int maSach;
@@ -74,15 +75,14 @@ public class PhieuMuonAdapter extends BaseAdapter {
         return 0;
     }
 
-    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(int i, View view, ViewGroup parent) {
         sachDAO = new SachDAO(context);
         thanhVienDAO = new ThanhVienDAO(context);
         phieuMuonDAO = new PhieuMuonDAO(context);
-        phieuMuon = mPhieuMuon.get(position);
+        phieuMuon = mPhieuMuon.get(i);
 
-        Sach sach = sachDAO.getTVbyMaSach(phieuMuon.getMaSach());
+        Sach sach = sachDAO.getSachbyMaSach(phieuMuon.getMaSach());
         ThanhVien thanhVien = thanhVienDAO.getTVbyMaTV(phieuMuon.getMaTV());
 
         if (view == null) {
@@ -112,7 +112,6 @@ public class PhieuMuonAdapter extends BaseAdapter {
         }
 
         imgDeletePM.setOnClickListener(v -> deleteDialog(phieuMuon));
-
         imgEditPM.setOnClickListener(v -> editDialog(phieuMuon));
 
         return view;
@@ -122,23 +121,24 @@ public class PhieuMuonAdapter extends BaseAdapter {
         new AlertDialog.Builder(context)
                 .setTitle("Thông báo")
                 .setMessage("Bạn có thật sự muốn xóa không?")
-                .setNegativeButton("Huỷ", (dialog, which) -> dialog.dismiss())
-                .setPositiveButton("Đồng ý", (dialog, which) -> {
-                    boolean delete = phieuMuonDAO.deletePhieuMuon(phieuMuon);
-                    if (delete) {
-                        mPhieuMuon.remove(phieuMuon);
-                        notifyDataSetChanged();
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                }).create().show();
+                .setNegativeButton("Huỷ",
+                        (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Đồng ý",
+                        (dialog, which) -> {
+                            boolean delete = phieuMuonDAO.deletePhieuMuon(phieuMuon);
+                            if (delete) {
+                                mPhieuMuon.remove(phieuMuon);
+                                notifyDataSetChanged();
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }).create().show();
     }
 
-    public void editDialog(PhieuMuon phieuMuon) {
+    public void editDialog(@NonNull PhieuMuon phieuMuon) {
         Dialog dialog = new Dialog(context);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.show();
         dialog.setContentView(R.layout.phieu_muon_dialog_update);
         EditText edMaPM = dialog.findViewById(R.id.edMaPM);
         TextView tvNgay = dialog.findViewById(R.id.tvNgay);
@@ -184,7 +184,6 @@ public class PhieuMuonAdapter extends BaseAdapter {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
                 maThanhVien = mThanhVien.get(i).getMaTV();
-//                Toast.makeText(context, "Chọn " + mThanhVien.get(i).getHoTen(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -198,7 +197,6 @@ public class PhieuMuonAdapter extends BaseAdapter {
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
                 maSach = mSach.get(i).getMaSach();
                 tienThue = mSach.get(i).getGiaThue();
-//                Toast.makeText(context, "Chọn " + mSach.get(i).getTenSach(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

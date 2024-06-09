@@ -1,6 +1,7 @@
 package fpt.hieudmph47182.bookstoreapplication.fragments;
 
 import android.app.Dialog;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,6 @@ public class SachFragment extends Fragment {
     private FragmentSachBinding binding;
     private LoaiSachDAO loaiSachDAO;
     private SachDAO sachDAO;
-    private Sach sach;
-    private LoaiSachSpinnerAdapter loaiSachSpinnerAdapter;
     private SachAdapter sachAdapter;
     private ArrayList<LoaiSach> mLoaiSach;
     private int maLoaiSach;
@@ -68,7 +67,7 @@ public class SachFragment extends Fragment {
         EditText edGiaThue = dialog.findViewById(R.id.edGiaThue);
         Spinner spSach = dialog.findViewById(R.id.spSach);
         mLoaiSach = loaiSachDAO.getLoaiSach();
-        loaiSachSpinnerAdapter = new LoaiSachSpinnerAdapter(requireActivity(), mLoaiSach);
+        LoaiSachSpinnerAdapter loaiSachSpinnerAdapter = new LoaiSachSpinnerAdapter(requireActivity(), mLoaiSach);
         spSach.setAdapter(loaiSachSpinnerAdapter);
 
         AppCompatButton btnSaveSach = dialog.findViewById(R.id.btnSaveSach);
@@ -76,39 +75,29 @@ public class SachFragment extends Fragment {
 
         edMaSach.setEnabled(false);
 
-        spSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                maLoaiSach = mLoaiSach.get(i).getMaLoai();
-//                Toast.makeText(requireActivity(), "Chọn " + mLoaiSach.get(i).getTenLoaiSach(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         btnCancelSach.setOnClickListener(v -> dialog.dismiss());
 
         btnSaveSach.setOnClickListener(v -> {
             String tenSach = edTenSach.getText().toString();
             String giaThue = edGiaThue.getText().toString();
-
+            int position = spSach.getSelectedItemPosition();
             if (tenSach.isEmpty() || giaThue.isEmpty()) {
                 Toast.makeText(requireActivity(), "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             } else {
-                sach = new Sach(tenSach, Integer.parseInt(giaThue));
-                sach.setMaLoai(maLoaiSach);
-                spSach.setSelection(loaiSachSpinnerAdapter.getCount());
-                boolean insert = SachDAO.insertSach(sach);
-                if (insert) {
-                    Toast.makeText(requireActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    refreshActivity();
-                    sachAdapter.notifyDataSetChanged();
-                    dialog.dismiss();
-                } else {
-                    Toast.makeText(requireActivity(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                try {
+                    int idLoaiSach = mLoaiSach.get(position).getMaLoai();
+                    Sach sach = new Sach(0, tenSach, Integer.parseInt(giaThue), idLoaiSach);
+                    boolean insert = SachDAO.insertSach(sach);
+                    if (insert) {
+                        Toast.makeText(requireActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        refreshActivity();
+                        sachAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(requireActivity(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(requireActivity(), "Chưa có loại sách nào được tạo, bạn cần phải tạo loại sách trước", Toast.LENGTH_SHORT).show();
                 }
             }
         });

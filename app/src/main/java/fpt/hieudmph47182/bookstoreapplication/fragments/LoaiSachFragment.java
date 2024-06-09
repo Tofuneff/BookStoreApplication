@@ -71,6 +71,7 @@ public class LoaiSachFragment extends Fragment {
                 loaiSach = new LoaiSach(0, tenLS);
                 boolean insert = loaiSachDAO.insertLoaiSach(loaiSach);
                 if (insert) {
+
                     Toast.makeText(requireActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     refreshActivity();
                     loaiSachAdapter.notifyDataSetChanged();

@@ -16,6 +16,11 @@
         android:title="@string/quan_ly_thanh_vien"
         android:icon="@drawable/ic_crowd"/>
 
+    <item android:id="@+id/quan_ly_thu_thu"
+        android:title="@string/quan_ly_thu_thu"
+        android:icon="@drawable/ic_librarian"
+        android:visible="false"/>
+
     <group android:checkableBehavior="single">
 
         <item android:title="@string/thong_ke">
@@ -44,7 +49,8 @@
 
                 <item android:id="@+id/them_nguoi_dung"
                     android:title="@string/them_nguoi_dung"
-                    android:icon="@drawable/ic_add_user"/>
+                    android:icon="@drawable/ic_add_user"
+                    android:visible="false"/>
 
                 <item android:id="@+id/doi_mat_khau"
                     android:title="@string/doi_mat_khau"

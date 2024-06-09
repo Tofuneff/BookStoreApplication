@@ -38,11 +38,8 @@ public class PhieuMuonFragment extends Fragment {
     private SachDAO sachDAO;
     private ArrayList<ThanhVien> mThanhVien;
     private ArrayList<Sach> mSach;
-    private final PhieuMuon phieuMuon = new PhieuMuon();
+    private PhieuMuon phieuMuon = new PhieuMuon();
     private PhieuMuonAdapter phieuMuonAdapter;
-    private int maThanhVien;
-    private int maSach;
-    private int tienThue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +66,6 @@ public class PhieuMuonFragment extends Fragment {
     private void showDialog() {
         Dialog dialog = new Dialog(requireActivity());
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.show();
         dialog.setContentView(R.layout.phieu_muon_dialog);
         EditText edMaPM = dialog.findViewById(R.id.edMaPM);
         Spinner spTV = dialog.findViewById(R.id.spTV);
@@ -88,49 +84,26 @@ public class PhieuMuonFragment extends Fragment {
         SachSpinnerAdapter sachSpinnerAdapter = new SachSpinnerAdapter(requireActivity(), mSach);
         spSach.setAdapter(sachSpinnerAdapter);
 
-        spTV.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                maThanhVien = mThanhVien.get(i).getMaTV();
-//                Toast.makeText(requireActivity(), "Chọn " + mThanhVien.get(i).getHoTen(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                maSach = mSach.get(i).getMaSach();
-                tienThue = mSach.get(i).getGiaThue();
-//                Toast.makeText(requireActivity(), "Chọn " + mSach.get(i).getTenSach(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         btnCancelPM.setOnClickListener(v -> dialog.dismiss());
 
         btnSavePM.setOnClickListener(v -> {
-            phieuMuon.setMaPM(Integer.parseInt(String.valueOf(phieuMuon.getMaPM())));
-            phieuMuon.setMaSach(maSach);
-            phieuMuon.setMaTV(maThanhVien);
-            phieuMuon.setTienThue(tienThue);
-            phieuMuon.setNgay(new Date());
-            boolean insert = phieuMuonDAO.insertPhieuMuon(phieuMuon);
-            if (insert) {
-                Toast.makeText(requireActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                refreshActivity();
-                phieuMuonAdapter.notifyDataSetChanged();
-                dialog.dismiss();
-            } else {
-                Toast.makeText(requireActivity(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
+            try {
+                int idThanhVien = mThanhVien.get(spTV.getSelectedItemPosition()).getMaTV();
+                int idSach = mSach.get(spSach.getSelectedItemPosition()).getMaSach();
+                int price = mSach.get(spSach.getSelectedItemPosition()).getGiaThue();
+                Date date = new Date();
+                phieuMuon = new PhieuMuon(idThanhVien, idSach, price, date);
+                boolean insert = phieuMuonDAO.insertPhieuMuon(phieuMuon);
+                if (insert) {
+                    Toast.makeText(requireActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    refreshActivity();
+                    phieuMuonAdapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(requireActivity(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(requireActivity(), "Dữ liệu không tồn tại, bạn phải tạo dữ liệu trước", Toast.LENGTH_LONG).show();
             }
         });
         dialog.show();

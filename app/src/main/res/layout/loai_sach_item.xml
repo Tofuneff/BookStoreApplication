@@ -42,11 +42,31 @@
         android:text="@string/text"
         android:textSize="18sp"/>
 
+    <TextView
+        android:id="@+id/tv_sls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_tl"
+        android:text="@string/so_luong"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSoLuongSach"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTenLoaiSach"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/tv_tl"
+        android:text="@string/number"
+        android:textSize="18sp"/>
+
     <ImageButton
         android:id="@+id/imgEdit_ls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/imgDelete_ls"
+        android:layout_below="@+id/tv_ml"
         android:layout_marginEnd="5dp"
         android:background="#FFFFFF"
         android:src="@drawable/ic_edit"
@@ -57,6 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tv_ml"
         android:background="#FFFFFF"
         android:src="@drawable/ic_trash"
         tools:ignore="ContentDescription" />

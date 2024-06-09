@@ -14,7 +14,8 @@ public class Sach {
         this.giaThue = giaThue;
     }
 
-    public Sach(String tenSach, int giaThue, int maLoai) {
+    public Sach(int maSach, String tenSach, int giaThue, int maLoai) {
+        this.maSach = maSach;
         this.tenSach = tenSach;
         this.giaThue = giaThue;
         this.maLoai = maLoai;

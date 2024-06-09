@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import java.util.Objects;
 
 import fpt.hieudmph47182.bookstoreapplication.R;
 import fpt.hieudmph47182.bookstoreapplication.dao.LoaiSachDAO;
+import fpt.hieudmph47182.bookstoreapplication.dao.PhieuMuonDAO;
 import fpt.hieudmph47182.bookstoreapplication.dao.SachDAO;
 import fpt.hieudmph47182.bookstoreapplication.model.LoaiSach;
 import fpt.hieudmph47182.bookstoreapplication.model.Sach;
@@ -33,6 +35,7 @@ public class SachAdapter extends BaseAdapter {
     private ArrayList<LoaiSach> mLoaiSach;
     private SachDAO sachDAO;
     private LoaiSachDAO loaiSachDAO;
+    private PhieuMuonDAO phieuMuonDAO;
     private int maLoaiSach, spinner_position;
 
     public SachAdapter(Context context, ArrayList<Sach> mSach) {
@@ -63,11 +66,12 @@ public class SachAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         sachDAO = new SachDAO(context);
         loaiSachDAO = new LoaiSachDAO(context);
+        phieuMuonDAO = new PhieuMuonDAO(context);
 
         Sach sach = mSach.get(i);
-        LoaiSach loaiSach = loaiSachDAO.getLoaiSachByMaLoai(sach.getMaLoai());
 
         view = LayoutInflater.from(context).inflate(R.layout.sach_item, viewGroup, false);
+        ImageView imgSach = view.findViewById(R.id.imgSach);
         TextView tvMaSach = view.findViewById(R.id.tvMaSach);
         TextView tvTenSach = view.findViewById(R.id.tvTenSach);
         TextView tvGiaThue = view.findViewById(R.id.tvGiaThue);
@@ -75,10 +79,11 @@ public class SachAdapter extends BaseAdapter {
         ImageButton imgEditSach = view.findViewById(R.id.imgEditSach);
         ImageButton imgDeleteSach = view.findViewById(R.id.imgDeleteSach);
 
+        imgSach.setImageResource(R.drawable.img_book);
         tvMaSach.setText(String.valueOf(sach.getMaSach()));
         tvTenSach.setText(sach.getTenSach());
         tvGiaThue.setText(String.valueOf(sach.getGiaThue()));
-        tvLoaiSach.setText(loaiSach.getTenLoaiSach());
+        tvLoaiSach.setText(String.valueOf(sach.getMaLoai()));
 
         imgEditSach.setOnClickListener(v -> editDialog(sach));
         imgDeleteSach.setOnClickListener(v -> deleteDialog(sach));
@@ -92,6 +97,10 @@ public class SachAdapter extends BaseAdapter {
                 .setMessage("Bạn có thật sự muốn xóa không?")
                 .setNegativeButton("Huỷ", (dialog, which) -> dialog.dismiss())
                 .setPositiveButton("Đồng ý", (dialog, which) -> {
+                    if (!phieuMuonDAO.getPMbyMaSach(sach.getMaSach()).isEmpty()) {
+                        Toast.makeText(context, "Bạn không thể xoá sách khi nó vẫn đang trong phiếu mượn", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     boolean delete = sachDAO.deleteSach(sach);
                     if (delete) {
                         mSach.remove(sach);
@@ -106,7 +115,6 @@ public class SachAdapter extends BaseAdapter {
     public void editDialog(Sach sach) {
         Dialog dialog = new Dialog(context);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.show();
         dialog.setContentView(R.layout.sach_dialog_update);
         EditText edMaSach = dialog.findViewById(R.id.edMaSach);
         EditText edTenSach = dialog.findViewById(R.id.edTenSach);
@@ -136,7 +144,6 @@ public class SachAdapter extends BaseAdapter {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
                 maLoaiSach = mLoaiSach.get(i).getMaLoai();
-//                Toast.makeText(context, "Chọn " + mLoaiSach.get(i).getTenLoaiSach(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

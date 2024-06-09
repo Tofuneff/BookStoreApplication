@@ -23,8 +23,6 @@ public class ThuThuDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-
-
     public boolean checkLogin(String username, String password) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE MaTT = ? AND MatKhau = ?";
         Cursor cursor = db.rawQuery(query, new String[]{username, password});

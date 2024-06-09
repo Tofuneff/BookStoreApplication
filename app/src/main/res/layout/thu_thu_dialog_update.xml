@@ -19,73 +19,82 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#009688"
-            android:text="@string/them_phieu_muon"
+            android:text="@string/cap_nhat_thu_thu"
             android:gravity="center"
             android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="@string/ma_phieu_muon"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/edMaPM"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/ma_phieu_muon"
-            android:layout_marginBottom="15dp"
-            tools:ignore="Autofill,TextFields" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="@string/thanhVien"/>
-
-        <Spinner
-            android:id="@+id/spTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="@string/tenSach"/>
-
-        <Spinner
-            android:id="@+id/spnSach"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="8dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/ivThuThu"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/embe"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ngay"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:text="@string/maThuThu"/>
 
-            <TextView
-                android:id="@+id/tvNgay"
+            <EditText
+                android:id="@+id/edMaTT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/maThuThu"
+                android:layout_marginBottom="15dp"
+                tools:ignore="Autofill,TextFields" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_marginStart="5dp"/>
+                android:textStyle="bold"
+                android:text="@string/tenThuThu"/>
+
+            <EditText
+                android:id="@+id/edTenTT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tenThuThu"
+                android:layout_marginBottom="15dp"
+                tools:ignore="Autofill,TextFields" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/mat_khau"/>
+
+            <EditText
+                android:id="@+id/edMatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:hint="@string/mat_khau"
+                tools:ignore="Autofill,TextFields" />
 
         </LinearLayout>
 
@@ -93,41 +102,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tien_thue"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tv_tienThue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginStart="5dp"/>
-
-        </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/ckbTraSach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/da_tra_sach"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSavePM"
+                android:id="@+id/btnSaveTT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_save"
@@ -137,7 +116,7 @@
                 android:background="@drawable/border_style"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnCancelPM"
+                android:id="@+id/btnCancelTT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_cancle"

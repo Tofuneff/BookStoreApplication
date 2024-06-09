@@ -9,16 +9,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import fpt.hieudmph47182.bookstoreapplication.database.DbHelper;
 import fpt.hieudmph47182.bookstoreapplication.model.PhieuMuon;
-
+@SuppressLint({"SimpleDateFormat", "Recycle"})
 public class PhieuMuonDAO {
     private final DbHelper dbHelper;
     private final SQLiteDatabase db;
     private static final String TABLE_NAME = "PhieuMuon";
-    @SuppressLint("SimpleDateFormat")
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public PhieuMuonDAO(Context context) {
@@ -26,22 +24,66 @@ public class PhieuMuonDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-
-    public ArrayList<PhieuMuon> getAllPhieuMuon() {
+    public ArrayList<PhieuMuon> getPMbyMaSach(int maSach) {
         ArrayList<PhieuMuon> phieuMuons = new ArrayList<>();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE MaSach=?",
+                new String[]{String.valueOf(maSach)});
         while (cursor.moveToNext()) {
             PhieuMuon phieuMuon = new PhieuMuon(cursor.getInt(5), cursor.getInt(6));
             phieuMuon.setMaPM(cursor.getInt(0));
             phieuMuon.setMaTV(cursor.getInt(1));
             phieuMuon.setMaTT(cursor.getString(2));
             phieuMuon.setMaSach(cursor.getInt(3));
-//            Date date = new Date(cursor.getLong(4)*1000);
             try {
                 phieuMuon.setNgay(sdf.parse(cursor.getString(4)));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            phieuMuon.setTienThue(cursor.getInt(5));
+            phieuMuon.setTraSach(cursor.getInt(6));
+            phieuMuons.add(phieuMuon);
+        }
+        return phieuMuons;
+    }
+
+    public ArrayList<PhieuMuon> getPMbyMaTV(int maTV) {
+        ArrayList<PhieuMuon> phieuMuons = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE MaTV=?",
+                new String[]{String.valueOf(maTV)});
+        while (cursor.moveToNext()) {
+            PhieuMuon phieuMuon = new PhieuMuon(cursor.getInt(5), cursor.getInt(6));
+            phieuMuon.setMaPM(cursor.getInt(0));
+            phieuMuon.setMaTV(cursor.getInt(1));
+            phieuMuon.setMaTT(cursor.getString(2));
+            phieuMuon.setMaSach(cursor.getInt(3));
+            try {
+                phieuMuon.setNgay(sdf.parse(cursor.getString(4)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            phieuMuon.setTienThue(cursor.getInt(5));
+            phieuMuon.setTraSach(cursor.getInt(6));
+            phieuMuons.add(phieuMuon);
+        }
+        return phieuMuons;
+    }
+
+    public ArrayList<PhieuMuon> getAllPhieuMuon() {
+        ArrayList<PhieuMuon> phieuMuons = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        while (cursor.moveToNext()) {
+            PhieuMuon phieuMuon = new PhieuMuon(cursor.getInt(5), cursor.getInt(6));
+            phieuMuon.setMaPM(cursor.getInt(0));
+            phieuMuon.setMaTV(cursor.getInt(1));
+            phieuMuon.setMaTT(cursor.getString(2));
+            phieuMuon.setMaSach(cursor.getInt(3));
+            try {
+                phieuMuon.setNgay(sdf.parse(cursor.getString(4)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            phieuMuon.setTienThue(cursor.getInt(5));
+            phieuMuon.setTraSach(cursor.getInt(6));
             phieuMuons.add(phieuMuon);
         }
         return phieuMuons;

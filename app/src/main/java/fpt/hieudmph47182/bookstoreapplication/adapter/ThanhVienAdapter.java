@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +18,10 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 import fpt.hieudmph47182.bookstoreapplication.R;
+import fpt.hieudmph47182.bookstoreapplication.dao.PhieuMuonDAO;
 import fpt.hieudmph47182.bookstoreapplication.dao.ThanhVienDAO;
 import fpt.hieudmph47182.bookstoreapplication.model.ThanhVien;
 
@@ -26,6 +29,7 @@ public class ThanhVienAdapter extends BaseAdapter {
     private final Context context;
     private final ArrayList<ThanhVien> mThanhVien;
     private ThanhVienDAO thanhVienDAO;
+    private PhieuMuonDAO phieuMuonDAO;
 
     public ThanhVienAdapter(Context context, ArrayList<ThanhVien> mThanhVien) {
         this.context = context;
@@ -54,14 +58,22 @@ public class ThanhVienAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         thanhVienDAO = new ThanhVienDAO(context);
+        phieuMuonDAO = new PhieuMuonDAO(context);
         ThanhVien thanhVien = mThanhVien.get(i);
 
         view = LayoutInflater.from(context).inflate(R.layout.thanh_vien_item, viewGroup, false);
+        ImageView imgTV = view.findViewById(R.id.imgTV);
         TextView tvMaTV = view.findViewById(R.id.tvMaTV);
         TextView tvTenThanhVien = view.findViewById(R.id.tvTenThanhVien);
         TextView tvNamSinh = view.findViewById(R.id.tvNamSinh);
         ImageButton imgDeleteTV = view.findViewById(R.id.imgDeleteTV);
         ImageButton imgEditTV = view.findViewById(R.id.imgEditTV);
+
+        Random randomImages = new Random();
+        int rndInt = randomImages.nextInt(4) + 1;
+        String imgName = "avatar" + rndInt;
+        int resourceId = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
+        imgTV.setImageResource(resourceId);
 
         tvMaTV.setText(String.valueOf(thanhVien.getMaTV()));
         tvTenThanhVien.setText(thanhVien.getHoTen());
@@ -80,6 +92,10 @@ public class ThanhVienAdapter extends BaseAdapter {
                 .setMessage("Bạn có thật sự muốn xóa không?")
                 .setNegativeButton("Huỷ", (dialog, which) -> dialog.dismiss())
                 .setPositiveButton("Đồng ý", (dialog, which) -> {
+                    if (!phieuMuonDAO.getPMbyMaTV(thanhVien.getMaTV()).isEmpty()) {
+                        Toast.makeText(context, "Bạn không thể xoá thành viên khi họ vẫn đang trong phiếu mượn", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     boolean delete = thanhVienDAO.deleteThanhVien(thanhVien);
                     if (delete) {
                         mThanhVien.remove(thanhVien);

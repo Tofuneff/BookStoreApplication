@@ -73,4 +73,13 @@
     <string name="cap_nhat_phieu_muon">CẬP NHẬT PHIẾU MƯỢN</string>
     <string name="cap_nhat_loai_sach">CẬP NHẬT LOẠI SÁCH</string>
     <string name="trang_thai">Trạng thái:</string>
+    <string name="todo">TODO</string>
+    <string name="ma_thu_thu">Mã thủ thư:</string>
+    <string name="ten_thu_thu">Tên thủ thư:</string>
+    <string name="mat_khau_tt">Mật khẩu:</string>
+    <string name="cap_nhat_thu_thu">CẬP NHẬT THỦ THƯ</string>
+    <string name="maThuThu">Mã thủ thử</string>
+    <string name="tenThuThu">Tên thủ thư</string>
+    <string name="quan_ly_thu_thu">Quản lý Thủ Thư</string>
+    <string name="s_l_t_m_n">Số lượt mượn:</string>
 </resources>

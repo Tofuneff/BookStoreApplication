@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 import fpt.hieudmph47182.bookstoreapplication.database.DbHelper;
 import fpt.hieudmph47182.bookstoreapplication.model.Sach;
-import fpt.hieudmph47182.bookstoreapplication.model.ThanhVien;
-
+@SuppressLint("Recycle")
 public class SachDAO {
     private final DbHelper dbHelper;
     private static SQLiteDatabase db = null;
@@ -22,28 +21,35 @@ public class SachDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-    public Sach getTVbyMaSach(int maSach) {
+    public Sach getSachbyMaSach(int maSach) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE MaSach = ?";
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(maSach)});
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(maSach)});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            Sach sach = new Sach(cursor.getString(1),
-                    cursor.getInt(2));
-            sach.setMaSach(cursor.getInt(0));
-            sach.setMaLoai(cursor.getInt(3));
-            return sach;
+            return new Sach(cursor.getInt(0), cursor.getString(1),
+                    cursor.getInt(2), cursor.getInt(3));
         }
         return null;
     }
 
+    public ArrayList<Sach> getSachByMaSach(int maSach) {
+        ArrayList<Sach> saches = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE MaSach = ?",
+                new String[]{String.valueOf(maSach)});
+        while (cursor.moveToNext()) {
+            Sach sach = new Sach(cursor.getInt(0), cursor.getString(1),
+                    cursor.getInt(2), cursor.getInt(3));
+            saches.add(sach);
+        }
+        return saches;
+    }
+
     public ArrayList<Sach> getSach() {
         ArrayList<Sach> saches = new ArrayList<>();
-        @SuppressLint("Recycle") Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         while (cursor.moveToNext()) {
-            Sach sach = new Sach(cursor.getString(1),
-                    cursor.getInt(2));
-            sach.setMaSach(cursor.getInt(0));
-            sach.setMaLoai(cursor.getInt(3));
+            Sach sach = new Sach(cursor.getInt(0), cursor.getString(1),
+                    cursor.getInt(2), cursor.getInt(3));
             saches.add(sach);
         }
         return saches;

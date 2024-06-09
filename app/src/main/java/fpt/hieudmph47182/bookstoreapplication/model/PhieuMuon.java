@@ -19,6 +19,13 @@ public class PhieuMuon {
         this.traSach = traSach;
     }
 
+    public PhieuMuon(int maTV, int maSach, int tienThue, Date ngay) {
+        this.maTV = maTV;
+        this.maSach = maSach;
+        this.tienThue = tienThue;
+        this.ngay = ngay;
+    }
+
     public int getMaPM() {
         return maPM;
     }
@@ -31,8 +38,9 @@ public class PhieuMuon {
         return maTV;
     }
 
-    public void setMaTV(int maTV) {
+    public int setMaTV(int maTV) {
         this.maTV = maTV;
+        return maTV;
     }
 
     public String getMaTT() {
@@ -47,8 +55,9 @@ public class PhieuMuon {
         return maSach;
     }
 
-    public void setMaSach(int maSach) {
+    public int setMaSach(int maSach) {
         this.maSach = maSach;
+        return maSach;
     }
 
     public Date getNgay() {
@@ -63,8 +72,9 @@ public class PhieuMuon {
         return tienThue;
     }
 
-    public void setTienThue(int tienThue) {
+    public int setTienThue(int tienThue) {
         this.tienThue = tienThue;
+        return tienThue;
     }
 
     public int getTraSach() {
